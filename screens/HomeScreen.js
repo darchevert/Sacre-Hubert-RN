@@ -6,11 +6,12 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  StatusBar
 } from 'react-native';
 import {WebBrowser} from 'expo';
 import {MonoText} from '../components/StyledText';
-import {List, ListItem, SearchBar} from 'react-native-elements'
+import {List, ListItem, ListView, SearchBar} from 'react-native-elements'
 
 const punchlines = [
   {
@@ -323,20 +324,54 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <ScrollView>
-        <SearchBar lightTheme="lightTheme" /*onChangeText={someMethod} onClearText={someMethod}*/ placeholder='Cherchez une réplique...'/>
+      <View style={{flex:1, paddingTop:20}}>
+
+      <SearchBar lightTheme="lightTheme" /*onChangeText={someMethod} onClearText={someMethod}*/ placeholder='Cherchez une réplique...'/>
+
+
+
+      <ScrollView style={{flex:1}}>
 
         <List containerStyle={{
-            marginBottom: 20
+            marginBottom: StatusBar.currentHeight
           }}>
           {
-            punchlines.map((l, i) => (<ListItem roundAvatar="roundAvatar" avatar={{
-                uri: l.photo
-              }} key={i} title={l.punchline}/>))
+            punchlines.map((l, i) => (
+              <ListItem roundAvatar="roundAvatar"
+                // avatar={{source= {l.photo}}} key={i}
+              title={l.punchline}/>))
           }
         </List>
-      </ScrollView>)
-
-  };
-
+      </ScrollView>
+</View>
+)}
 }
+
+
+
+// renderRow () {
+//   return (
+//     <View style={{flex:1, marginTop:0}}>
+//     punchlines.map((l, i) => (
+//     <ListItem
+//       roundAvatar="roundAvatar"
+//       key={i}
+//       title={l.punchline}
+//       avatar={{uri:l.photo}}
+//     />
+//   )
+// )
+// </View>
+// )
+// }
+//
+// render () {
+//   return (
+//     <List>
+//       <ListView
+//         renderRow={this.renderRow}
+//
+//       />
+//     </List>
+//   )
+// }

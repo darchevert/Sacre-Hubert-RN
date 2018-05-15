@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, StatusBar } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
@@ -8,8 +8,15 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
+
+
+
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
+}, {
+  cardStyle:{
+    paddingTop: StatusBar.currentHeight
+  }
 });
 
 HomeStack.navigationOptions = {
@@ -28,6 +35,10 @@ HomeStack.navigationOptions = {
 
 const LinksStack = createStackNavigator({
   Links: LinksScreen,
+}, {
+  cardStyle:{
+    paddingTop:  StatusBar.currentHeight
+  }
 });
 
 LinksStack.navigationOptions = {
@@ -42,6 +53,10 @@ LinksStack.navigationOptions = {
 
 const SettingsStack = createStackNavigator({
   Settings: SettingsScreen,
+}, {
+  cardStyle:{
+    paddingTop:  StatusBar.currentHeight
+  }
 });
 
 SettingsStack.navigationOptions = {
