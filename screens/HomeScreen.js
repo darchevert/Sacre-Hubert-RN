@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import {WebBrowser} from 'expo';
 import {MonoText} from '../components/StyledText';
-import {List, ListItem, ListView, SearchBar} from 'react-native-elements'
+import {List, ListItem, ListView, SearchBar, Avatar} from 'react-native-elements'
 
 const punchlines = [
   {
@@ -19,7 +19,7 @@ const punchlines = [
     punchline: "OSS117! Pour vous servir!",
     name: "Lucien Bramard / OSS117",
     sound: "oss117pourvousservir",
-    photo: "../assets/images/jean_dujardin.jpg"
+    photo: '../assets/images/jean_dujardin.jpg'
   }, {
     id: 2,
     punchline: "Fais moi l'amour... Pas envie!",
@@ -317,10 +317,20 @@ const punchlines = [
   }
 ]
 
+
+
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
+
+  async playSound() {
+      try {
+        const {tintouin, status} = await Expo.Audio.Sound.create(require('../assets/sounds/tintouin.mp3'), {shouldPlay: true});
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
   render() {
     return (
@@ -328,50 +338,26 @@ export default class HomeScreen extends React.Component {
 
       <SearchBar lightTheme="lightTheme" /*onChangeText={someMethod} onClearText={someMethod}*/ placeholder='Cherchez une réplique...'/>
 
-
-
       <ScrollView style={{flex:1}}>
 
-        <List containerStyle={{
-            marginBottom: StatusBar.currentHeight
-          }}>
+        <View>
           {
             punchlines.map((l, i) => (
-              <ListItem roundAvatar="roundAvatar"
-                // avatar={{source= {l.photo}}} key={i}
-              title={l.punchline}/>))
+              <ListItem
+                hideChevron
+                roundAvatar
+                avatar='https://pbs.twimg.com/profile_images/1133992753/OSS117_400x400.png'
+                key={i}
+                title={l.punchline}
+                subtitle={l.name}
+                onPress={() => this.playSound()}
+              />
+            ))
+
           }
-        </List>
+        </View>
+
       </ScrollView>
 </View>
 )}
 }
-
-
-
-// renderRow () {
-//   return (
-//     <View style={{flex:1, marginTop:0}}>
-//     punchlines.map((l, i) => (
-//     <ListItem
-//       roundAvatar="roundAvatar"
-//       key={i}
-//       title={l.punchline}
-//       avatar={{uri:l.photo}}
-//     />
-//   )
-// )
-// </View>
-// )
-// }
-//
-// render () {
-//   return (
-//     <List>
-//       <ListView
-//         renderRow={this.renderRow}
-//
-//       />
-//     </List>
-//   )
-// }
