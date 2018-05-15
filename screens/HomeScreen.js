@@ -6,185 +6,337 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
-import { WebBrowser } from 'expo';
+import {WebBrowser} from 'expo';
+import {MonoText} from '../components/StyledText';
+import {List, ListItem, SearchBar} from 'react-native-elements'
 
-import { MonoText } from '../components/StyledText';
-
-
+const punchlines = [
+  {
+    id: 1,
+    punchline: "OSS117! Pour vous servir!",
+    name: "Lucien Bramard / OSS117",
+    sound: "oss117pourvousservir",
+    photo: "../assets/images/jean_dujardin.jpg"
+  }, {
+    id: 2,
+    punchline: "Fais moi l'amour... Pas envie!",
+    name: "Princesse Al Tarouk",
+    photo: "./images/aure_atika.jpg",
+    sound: "faismoilamourpasenvie"
+  }, {
+    id: 3,
+    punchline: "Viens crotale! Quelques heures!",
+    name: "Princesse Al Tarouk",
+    photo: "./images/aure_atika.jpg",
+    sound: "vienscrotalequelquesheures"
+  }, {
+    id: 4,
+    punchline: "Comment est votre blanquette?",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "commentblanquettebonne"
+  }, {
+    id: 5,
+    punchline: "Hareng pomme à l'huile",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "harengramequin"
+  }, {
+    id: 6,
+    punchline: "C'est cocasse!",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "cocasse"
+  }, {
+    id: 7,
+    punchline: "J'aime les panoramas",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "jaimelespanoramas"
+  }, {
+    id: 8,
+    punchline: "Des millions?!",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "desmillions"
+  }, {
+    id: 9,
+    punchline: "Qui êtes-vous?!",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "quietesvous"
+  }, {
+    id: 10,
+    punchline: "C'est Monsieur René Coty",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "renecoty"
+  }, {
+    id: 11,
+    punchline: "J'aime me beurrer la biscotte",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "beurrerbiscotte"
+  }, {
+    id: 12,
+    punchline: "Bienvenue au Caire...",
+    name: "Gerhard Moeller",
+    photo: "./images/richard_sammel.jpg",
+    sound: "bienvenueaucaire"
+  }, {
+    id: 13,
+    punchline: "J'ai réservé au nom de Bramard!",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "Bramard"
+  }, {
+    id: 14,
+    punchline: "J'aime le bruit blanc de l'eau",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "bruitblanc"
+  }, {
+    id: 15,
+    punchline: "Ca me sert à rien...",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "Camesertarien"
+  }, {
+    id: 16,
+    punchline: "C'est drôle...",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "cestdrole"
+  }, {
+    id: 17,
+    punchline: "C'est toi arrêtez!!",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "cesttoiarretez"
+  }, {
+    id: 18,
+    punchline: "C'est une astuce!",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "cestuneastuce"
+  }, {
+    id: 19,
+    punchline: "Combien as-tu d'enfants Slimane?",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "combienenfants2"
+  }, {
+    id: 20,
+    punchline: "Comment est quoi?!",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "commentestquoi"
+  }, {
+    id: 21,
+    punchline: "On ne devrait jamais faire confiance à une femme",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "confiancefemme"
+  }, {
+    id: 22,
+    punchline: "Je vous mettrai un petit coup de poliche",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "coupdepoliche"
+  }, {
+    id: 23,
+    punchline: "Mais il va la fermer sa gueule?!",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "fermersagueule"
+  }, {
+    id: 24,
+    punchline: "Et non pas le gratin de pommes de terres...",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "gratin"
+  }, {
+    id: 25,
+    punchline: "L'imam...",
+    name: "Larmina El Akmar Betouche",
+    photo: "./images/berenice_bejo.jpg",
+    sound: "imam"
+  }, {
+    id: 26,
+    punchline: "Inch'Allah!",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "inchallah"
+  }, {
+    id: 27,
+    punchline: "Jack! Jack...",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "jack"
+  }, {
+    id: 28,
+    punchline: "J'aime quand on m'enduit d'huile",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "jaimehuile"
+  }, {
+    id: 29,
+    punchline: "J'aime me battre",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "jaimemebattre"
+  }, {
+    id: 30,
+    punchline: "Jouer au malin",
+    name: "Raymond Pelletier",
+    photo: "./images/francois_damiens.jpg",
+    sound: "joueraumalin"
+  }, {
+    id: 31,
+    punchline: "Tu n'es pas seulement un lâche...",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "lachetraitre"
+  }, {
+    id: 32,
+    punchline: "Moi qui pensais vous laisser faire l'amour avec moi",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "laisserfairelamour"
+  }, {
+    id: 33,
+    punchline: "Et si j'étais naine, et myope?",
+    name: "Larmina El Akmar Betouch",
+    photo: "./images/berenice_bejo.jpg",
+    sound: "nainemyope"
+  }, {
+    id: 34,
+    punchline: "On va boir un verre ou...",
+    name: "Raymond Pelletier",
+    photo: "./images/francois_damiens.jpg",
+    sound: "onvaboireunverre"
+  }, {
+    id: 35,
+    punchline: "On va dire que c'est moi!",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "onvadirequecestmoi"
+  }, {
+    id: 36,
+    punchline: "C'est la piquette Jack!",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "piquettejack"
+  }, {
+    id: 37,
+    punchline: "On dirait une poissonnière de Ménilmontant!",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "poissonniere"
+  }, {
+    id: 38,
+    punchline: "Moi je suis dans le poulet!",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "pouletbordel"
+  }, {
+    id: 39,
+    punchline: "Tu me prends pour un crétin?!",
+    name: "Raymond Pelletier",
+    photo: "./images/francois_damiens.jpg",
+    sound: "prendspouruncretin"
+  }, {
+    id: 40,
+    punchline: "Ta pudeur t'honore Slimane",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "pudeurhonore"
+  }, {
+    id: 41,
+    punchline: "S'agirait de grandir...",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "sagiraitdegrandir"
+  }, {
+    id: 42,
+    punchline: "Mettre mon smocking en alpaga!",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "smockingenalpaga"
+  }, {
+    id: 43,
+    punchline: "Le Soviet éponge!",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "sovieteponge"
+  }, {
+    id: 44,
+    punchline: "T'es mauvais!",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "tesmauvais"
+  }, {
+    id: 45,
+    punchline: "C'était donc ça tout ce tintouin!",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "tintouin"
+  }, {
+    id: 46,
+    punchline: "Très français",
+    name: "Larmina El Akmar Betouch",
+    photo: "./images/berenice_bejo.jpg",
+    sound: "tresfrancaismerci"
+  }, {
+    id: 47,
+    punchline: "Triste Sir!",
+    name: "Raymond Pelletier",
+    photo: "./images/francois_damiens.jpg",
+    sound: "tristesir"
+  }, {
+    id: 48,
+    punchline: "Une Suze!",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "unesuze"
+  }, {
+    id: 49,
+    punchline: "Vous voulez mourir Bramard?!",
+    name: "Raymond Pelletier",
+    photo: "./images/francois_damiens.jpg",
+    sound: "voulezmourirbramar"
+  }, {
+    id: 50,
+    punchline: "Elle est bonne...",
+    name: "Lucien Bramard / OSS117",
+    photo: "./images/jean_dujardin.jpg",
+    sound: "elleestbonne"
+  }
+]
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    header: null
   };
 
   render() {
     return (
-      <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
-          </View>
+      <ScrollView>
+        <SearchBar lightTheme="lightTheme" /*onChangeText={someMethod} onClearText={someMethod}*/ placeholder='Cherchez une réplique...'/>
 
-          <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
+        <List containerStyle={{
+            marginBottom: 20
+          }}>
+          {
+            punchlines.map((l, i) => (<ListItem roundAvatar="roundAvatar" avatar={{
+                uri: l.photo
+              }} key={i} title={l.punchline}/>))
+          }
+        </List>
+      </ScrollView>)
 
-            <Text style={styles.getStartedText}>Get started by opening</Text>
-
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
-            </View>
-
-            <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
-          </View>
-
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
-          </View>
-        </View>
-      </View>
-    );
-  }
-
-  _maybeRenderDevelopmentModeWarning() {
-    if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
-        </Text>
-      );
-
-      return (
-        <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use useful development
-          tools. {learnMoreButton}
-        </Text>
-      );
-    } else {
-      return (
-        <Text style={styles.developmentModeText}>
-          You are not in development mode, your app will run at full speed.
-        </Text>
-      );
-    }
-  }
-
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
   };
 
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
-    );
-  };
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
-  },
-  contentContainer: {
-    paddingTop: 30,
-  },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
-});
