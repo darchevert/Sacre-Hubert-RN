@@ -21,6 +21,12 @@ const HomeStack = createStackNavigator({
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'LES RÉPLIQUES',
+  tabBarOptions: {
+    tabStyle: {
+      backgroundColor:'orange',
+      color: 'white',
+    }
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -43,7 +49,12 @@ const LinksStack = createStackNavigator({
 
 LinksStack.navigationOptions = {
   tabBarLabel: 'MES PRÉFÉRÉES',
-  tabBarIcon: ({ focused }) => (
+  tabBarOptions: {
+    tabStyle: {
+      backgroundColor:'orange',
+      color: 'white',
+    }
+  },  tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={Platform.OS === 'ios' ? `ios-star${focused ? '' : '-outline'}` : 'md-star'}
@@ -61,7 +72,12 @@ const SettingsStack = createStackNavigator({
 
 SettingsStack.navigationOptions = {
   tabBarLabel: 'AUTRES FILMS',
-  tabBarIcon: ({ focused }) => (
+  tabBarOptions: {
+    tabStyle: {
+      backgroundColor:'orange',
+
+    }
+  },  tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={Platform.OS === 'ios' ? `ios-film${focused ? '' : '-outline'}` : 'md-film'}
