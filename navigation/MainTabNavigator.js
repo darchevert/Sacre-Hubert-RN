@@ -24,7 +24,6 @@ HomeStack.navigationOptions = {
   tabBarOptions: {
     tabStyle: {
       backgroundColor:'orange',
-      color: 'white',
     }
   },
   tabBarIcon: ({ focused }) => (
@@ -77,6 +76,7 @@ SettingsStack.navigationOptions = {
       backgroundColor:'orange',
 
     }
+
   },  tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
